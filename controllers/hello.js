@@ -71,10 +71,11 @@ let delData = async () => {
 
 
 var fn_hello = async (ctx, next) => {
-	var data = await queryData();
-    var name = ctx.params.name;
-    console.log(data)
-    ctx.response.body = `<h1>Hello, ${data[0].name}!</h1>`;
+	// var data = await queryData();
+    // var name = ctx.params.name;
+    // ctx.response.body = `<h1>Hello, ${data[0].name}!</h1>`;
+    console.log("login-password", ctx.cookies.get("login-password"))
+    ctx.response.body = "safsf"
 };
 
 module.exports = {

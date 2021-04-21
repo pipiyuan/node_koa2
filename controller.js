@@ -1,32 +1,26 @@
 const fs = require('fs');
-
-function addMapping(router, mapping) {
-    for (var url in mapping) {
-        if (url.startsWith('GET ')) {
-            var path = url.substring(4);
-            router.get(path, mapping[url]);
-            console.log(`register URL mapping: GET ${path}`);
-        } else if (url.startsWith('POST ')) {
-            var path = url.substring(5);
-            router.post(path, mapping[url]);
-            console.log(`register URL mapping: POST ${path}`);
-        } else {
-            console.log(`invalid URL: ${url}`);
-        }
-    }
-}
-
 function addControllers(router, dirName) {
     var files = fs.readdirSync(__dirname + `/${dirName}`);
-    var js_files = files.filter((f) => {
-        return f.endsWith('.js');
-    });
+    var js_files = files.filter(f => f.endsWith('.js'));
 
-    for (var f of js_files) {
+    js_files.forEach(f=>{
         console.log(`process controller: ${f}...`);
-        let mapping = require(__dirname + `/${dirName}/` + f);
-        addMapping(router, mapping);
-    }
+        const mapping = require(__dirname + `/${dirName}/` + f);
+
+        mapping.forEach(route=>{
+            if (route.startsWith('GET ')) {
+                var path = route.substring(4);
+                router.get(path, mapping[route]);
+                console.log(`register route mapping: GET ${path}`);
+            } else if (route.startsWith('POST ')) {
+                var path = route.substring(5);
+                router.post(path, mapping[route]);
+                console.log(`register URL mapping: POST ${path}`);
+            } else {
+                console.log(`invalid URL: ${route}`);
+            }
+        })
+    })
 }
 
 // addControllers(router);
