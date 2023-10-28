@@ -6,8 +6,9 @@ function addControllers(router, dirName) {
     js_files.forEach(f=>{
         console.log(`process controller: ${f}...`);
         const mapping = require(__dirname + `/${dirName}/` + f);
+        // console.log(`mapping`, mapping);
 
-        mapping.forEach(route=>{
+        for(let route in mapping){
             if (route.startsWith('GET ')) {
                 var path = route.substring(4);
                 router.get(path, mapping[route]);
@@ -19,7 +20,7 @@ function addControllers(router, dirName) {
             } else {
                 console.log(`invalid URL: ${route}`);
             }
-        })
+        }
     })
 }
 

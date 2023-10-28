@@ -72,9 +72,10 @@ let delData = async () => {
 
 var fn_hello = async (ctx, next) => {
 	// var data = await queryData();
-    // var name = ctx.params.name;
+    var name = ctx.params.name;
     // ctx.response.body = `<h1>Hello, ${data[0].name}!</h1>`;
-    console.log("login-password", ctx.cookies.get("login-password"))
+    // console.log("login-password", ctx.cookies.get("login-password"))
+    console.log("login-password", name)
     ctx.response.body = "safsf"
 };
 

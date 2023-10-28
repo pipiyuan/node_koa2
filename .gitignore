@@ -1,4 +1,6 @@
 node_modules
 npm-debug.log
 data
+yarn.lock
+package-lock.json
 
